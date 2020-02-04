@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -22,6 +21,15 @@ public class EventController {
     @Autowired
     public EventController(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
+    }
+
+    @GetMapping("/")
+    public List<EventResponse> get() {
+        return eventRepository.findAll().stream()
+            .map(event -> new EventResponse(
+                event,
+                getChildren(event)
+            )).collect(toList());
     }
 
     @GetMapping("/{id}")
@@ -49,18 +57,18 @@ public class EventController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id){
+    public void delete(@PathVariable String id) {
         eventRepository.deleteById(id);
     }
 
     @PutMapping
-    public EventResponse put(@RequestBody Event event){
-      event = eventRepository.save(event);
+    public EventResponse put(@RequestBody Event event) {
+        event = eventRepository.save(event);
 
-      return new EventResponse(
-          event,
-          getChildren(event)
-      );
+        return new EventResponse(
+            event,
+            getChildren(event)
+        );
     }
 
     private List<String> getChildren(Event event) {
