@@ -45,14 +45,7 @@ public class DungeonbaseApplication implements ApplicationRunner {
 			overpass = eventRepository.save(overpass);
 			Event goblinDen = new Event ("This large cave is divided in half by a ten-foot-high escarpment. A steep natural staircase leads from the lower portion to the upper ledge. The air is hazy with the smoke of a cooking fire, and pungent from the smell of poorly cured hides and unwashed goblins.", steepPassage.getId(), "Location");
 			goblinDen = eventRepository.save(goblinDen);
-			Event twinPools = new Event ("This cavern is half filled with two large pools of water. A narrow waterfall" +
-											 " high in the eastern wall feeds the pool, which drains out the western " +
-											 "end of the chamber to form the stream that flows out of the cave mouth " +
-											 "below. Low fieldstone walls serve as dams holding the water in. A wide " +
-											 "exit stands to the south, while two smaller passages lead west. The " +
-											 "sound of the waterfall echoes through the cavern, making it " +
-											 "difficult\n" +
-											 "to hear.", overpass.getId(), "Location");
+			Event twinPools = new Event ("This cavern is half filled with two large pools of water. A narrow waterfall high in the eastern wall feeds the pool, which drains out the western end of the chamber to form the stream that flows out of the cave mouth below. Low fieldstone walls serve as dams holding the water in. A wide exit stands to the south, while two smaller passages lead west. The sound of the waterfall echoes through the cavern, making it difficult to hear.", overpass.getId(), "Location");
 			twinPools = eventRepository.save(twinPools);
 			Event klargsCave = new Event ("Sacks and crates of looted provisions are piled up in the south end of this large cave. To the west, the floor slopes toward a narrow opening that descends into darkness. A larger opening leads north down a set of natural stone steps, the roar of falling water echoing from beyond. In the middle of the cavern, the coals of a large fire smolder.", twinPools.getId(), "Location");
 			klargsCave = eventRepository.save(klargsCave);
