@@ -4,10 +4,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vizientinc.dungeonbase.controllers.LocationController;
 import com.vizientinc.dungeonbase.controllers.PlayerController;
+import com.vizientinc.dungeonbase.models.Item;
 import com.vizientinc.dungeonbase.models.Player;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
+
+import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -16,11 +19,17 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Data
 public class PlayerResponse extends RepresentationModel<PlayerResponse> {
 
-    private final Player player;
+    private final String id;
+    private final String name;
+    private final List<Item> inventory;
+    private final String location;
 
     @JsonCreator
     public PlayerResponse(@JsonProperty("player") Player player) {
-        this.player = player;
+        this.id = player.getId();
+        this.name = player.getName();
+        this.inventory = player.getInventory();
+        this.location = player.getLocation();
 
         this.add(
             linkTo(methodOn(PlayerController.class).get(player.getId()))
