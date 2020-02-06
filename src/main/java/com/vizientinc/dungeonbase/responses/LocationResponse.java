@@ -2,8 +2,12 @@ package com.vizientinc.dungeonbase.responses;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.vizientinc.dungeonbase.controllers.ItemController;
 import com.vizientinc.dungeonbase.controllers.LocationController;
+import com.vizientinc.dungeonbase.controllers.PlayerController;
+import com.vizientinc.dungeonbase.models.Item;
 import com.vizientinc.dungeonbase.models.Location;
+import com.vizientinc.dungeonbase.models.Player;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
@@ -24,7 +28,9 @@ public class LocationResponse extends RepresentationModel<LocationResponse> {
     @JsonCreator
     public LocationResponse(
         @JsonProperty("location") Location location,
-        List<Location> adjacentLocations
+        List<Location> adjacentLocations,
+        List<Player> players,
+        List<Item> items
     ) {
         this.id = location.getId();
         this.name = location.getName();
@@ -42,5 +48,20 @@ public class LocationResponse extends RepresentationModel<LocationResponse> {
                     .withRel(adjacentLocation.getName())
             );
         }
+
+        for(Player player : players){
+            this.add(
+                linkTo(methodOn(PlayerController.class).get(player.getId()))
+                    .withRel("players")
+            );
+        }
+
+        for(Item item : items){
+            this.add(
+                linkTo(methodOn(ItemController.class).get(item.getId()))
+                    .withRel("items")
+            );
+        }
+
     }
 }

@@ -21,14 +21,12 @@ public class PlayerResponse extends RepresentationModel<PlayerResponse> {
 
     private final String id;
     private final String name;
-    private final List<Item> inventory;
     private final String location;
 
     @JsonCreator
     public PlayerResponse(@JsonProperty("player") Player player) {
         this.id = player.getId();
         this.name = player.getName();
-        this.inventory = player.getInventory();
         this.location = player.getLocation();
 
         this.add(

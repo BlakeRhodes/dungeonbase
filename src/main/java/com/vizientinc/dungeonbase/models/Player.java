@@ -1,32 +1,36 @@
 package com.vizientinc.dungeonbase.models;
 
+import com.vizientinc.dungeonbase.controllers.LocationController;
 import com.vizientinc.dungeonbase.requests.PlayerRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Player {
+public class Player implements ItemLocation {
     @Id
     String id;
     String name;
-    List<Item> inventory;
     String location;
 
     public Player(PlayerRequest playerRequest) {
         name = playerRequest.getName();
-        inventory = new ArrayList<>();
     }
 
     public void update(PlayerRequest playerRequest) {
         name = playerRequest.getName();
-        inventory = playerRequest.getInventory();
         location = playerRequest.getLocation();
+    }
+
+    @Override
+    public WebMvcLinkBuilder getLink() {
+        return linkTo(methodOn(LocationController.class).get(id));
     }
 }

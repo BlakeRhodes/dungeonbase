@@ -1,5 +1,6 @@
 package com.vizientinc.dungeonbase.models;
 
+import com.vizientinc.dungeonbase.requests.ItemRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,10 @@ public class Item {
     String name;
     String description;
     String location;
+
+    public Item(ItemRequest itemRequest){
+        this.name = itemRequest.getName();
+        this.description = itemRequest.getDescription();
+        this.location = itemRequest.getLocation();
+    }
 }

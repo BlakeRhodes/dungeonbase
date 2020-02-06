@@ -7,6 +7,8 @@ import com.vizientinc.dungeonbase.repositories.PlayerRepository;
 import com.vizientinc.dungeonbase.requests.PlayerRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlayerService {
     private final PlayerRepository playerRepository;
@@ -42,4 +44,7 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 
+    public List<Player> findByLocation(String locationId) {
+        return playerRepository.findAllByLocation(locationId);
+    }
 }
