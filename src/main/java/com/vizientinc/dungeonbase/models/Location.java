@@ -1,7 +1,6 @@
 package com.vizientinc.dungeonbase.models;
 
 import com.vizientinc.dungeonbase.controllers.LocationController;
-import com.vizientinc.dungeonbase.controllers.PlayerController;
 import lombok.Data;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 

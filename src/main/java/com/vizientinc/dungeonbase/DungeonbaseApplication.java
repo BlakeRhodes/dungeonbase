@@ -12,7 +12,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
 
 @SpringBootApplication
 public class DungeonbaseApplication implements ApplicationRunner {

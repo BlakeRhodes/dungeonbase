@@ -4,13 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vizientinc.dungeonbase.controllers.LocationController;
 import com.vizientinc.dungeonbase.controllers.PlayerController;
-import com.vizientinc.dungeonbase.models.Item;
 import com.vizientinc.dungeonbase.models.Player;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
-
-import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
