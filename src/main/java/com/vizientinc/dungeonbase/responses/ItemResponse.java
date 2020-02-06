@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vizientinc.dungeonbase.controllers.ItemController;
 import com.vizientinc.dungeonbase.models.Item;
-import com.vizientinc.dungeonbase.models.ItemLocation;
+import com.vizientinc.dungeonbase.interfaces.ItemLocation;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
@@ -21,7 +21,7 @@ public class ItemResponse extends RepresentationModel<LocationResponse> {
     String location;
 
     @JsonCreator
-    public ItemResponse(@JsonProperty("item") Item item, ItemLocation itemLocation){
+    public ItemResponse(Item item, ItemLocation itemLocation){
         this.id = item.getId();
         this.name = item.getName();
         this.description = item.getDescription();

@@ -1,6 +1,7 @@
 package com.vizientinc.dungeonbase.models;
 
 import com.vizientinc.dungeonbase.controllers.LocationController;
+import com.vizientinc.dungeonbase.interfaces.ItemLocation;
 import com.vizientinc.dungeonbase.requests.PlayerRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;

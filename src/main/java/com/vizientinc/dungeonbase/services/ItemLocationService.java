@@ -1,7 +1,7 @@
 package com.vizientinc.dungeonbase.services;
 
 import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
-import com.vizientinc.dungeonbase.models.ItemLocation;
+import com.vizientinc.dungeonbase.interfaces.ItemLocation;
 import com.vizientinc.dungeonbase.repositories.LocationRepository;
 import com.vizientinc.dungeonbase.repositories.PlayerRepository;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,7 @@
 package com.vizientinc.dungeonbase.models;
 
 import com.vizientinc.dungeonbase.controllers.LocationController;
+import com.vizientinc.dungeonbase.interfaces.ItemLocation;
 import lombok.Data;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
@@ -10,7 +11,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Data
-public class Location implements ItemLocation{
+public class Location implements ItemLocation {
     String id;
     String name;
     String description;

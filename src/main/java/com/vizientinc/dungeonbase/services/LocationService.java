@@ -19,7 +19,8 @@ public class LocationService {
         LocationRepository locationRepository,
         PlayerService playerService,
         ItemRepository itemRepository
-    ) {this.locationRepository = locationRepository;
+    ) {
+        this.locationRepository = locationRepository;
         this.playerService = playerService;
         this.itemRepository = itemRepository;
     }

@@ -1,4 +1,4 @@
-package com.vizientinc.dungeonbase.models;
+package com.vizientinc.dungeonbase.interfaces;
 
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
