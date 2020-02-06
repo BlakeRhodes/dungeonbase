@@ -2,7 +2,7 @@ package com.vizientinc.dungeonbase.responses;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.vizientinc.dungeonbase.controllers.EventController;
+import com.vizientinc.dungeonbase.controllers.LocationController;
 import com.vizientinc.dungeonbase.controllers.PlayerController;
 import com.vizientinc.dungeonbase.models.Player;
 import lombok.Data;
@@ -28,8 +28,8 @@ public class PlayerResponse extends RepresentationModel<PlayerResponse> {
         );
 
         this.add(
-            linkTo(methodOn(EventController.class).get(player.getCurrent()))
-            .withRel("current")
+            linkTo(methodOn(LocationController.class).get(player.getLocation()))
+            .withRel("location")
         );
     }
 }

@@ -1,6 +1,6 @@
 package com.vizientinc.dungeonbase.models;
 
-import com.vizientinc.dungeonbase.requests.NewPlayerRequest;
+import com.vizientinc.dungeonbase.requests.PlayerRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,10 +17,16 @@ public class Player {
     String id;
     String name;
     List<Item> inventory;
-    String current;
+    String location;
 
-    public Player(NewPlayerRequest newPlayerRequest) {
-        name = newPlayerRequest.name;
+    public Player(PlayerRequest playerRequest) {
+        name = playerRequest.getName();
         inventory = new ArrayList<>();
+    }
+
+    public void update(PlayerRequest playerRequest) {
+        name = playerRequest.getName();
+        inventory = playerRequest.getInventory();
+        location = playerRequest.getLocation();
     }
 }
