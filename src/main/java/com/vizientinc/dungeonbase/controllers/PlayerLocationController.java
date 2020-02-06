@@ -1,5 +1,6 @@
 package com.vizientinc.dungeonbase.controllers;
 
+import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
 import com.vizientinc.dungeonbase.responses.LocationResponse;
 import com.vizientinc.dungeonbase.services.LocationService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ public class PlayerLocationController {
     }
 
     @GetMapping("players/{playerId}/locations")
-    public LocationResponse get(@PathVariable String playerId) {
+    public LocationResponse get(@PathVariable String playerId) throws ResourceNotFound {
         return locationService.findByPlayerId(playerId);
     }
 }

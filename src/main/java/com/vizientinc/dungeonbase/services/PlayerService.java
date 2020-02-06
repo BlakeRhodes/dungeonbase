@@ -22,7 +22,7 @@ public class PlayerService {
         this.locationRepository = locationRepository;
     }
 
-    public Player findById(String id){
+    public Player findById(String id) throws ResourceNotFound {
             return playerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFound("Player", id));
     }
@@ -38,7 +38,7 @@ public class PlayerService {
             return playerRepository.save(player);
     }
 
-    public Player updatePlayer(PlayerRequest playerRequest){
+    public Player updatePlayer(PlayerRequest playerRequest) throws ResourceNotFound {
         Player player = findById(playerRequest.getId());
         player.update(playerRequest);
         return playerRepository.save(player);

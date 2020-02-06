@@ -1,6 +1,7 @@
 package com.vizientinc.dungeonbase.models;
 
 import com.vizientinc.dungeonbase.controllers.LocationController;
+import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
 import com.vizientinc.dungeonbase.interfaces.ItemLocation;
 import com.vizientinc.dungeonbase.requests.PlayerRequest;
 import lombok.AllArgsConstructor;
@@ -31,7 +32,7 @@ public class Player implements ItemLocation {
     }
 
     @Override
-    public WebMvcLinkBuilder getLink() {
+    public WebMvcLinkBuilder getLink() throws ResourceNotFound {
         return linkTo(methodOn(LocationController.class).get(id));
     }
 }

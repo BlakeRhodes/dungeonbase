@@ -18,7 +18,7 @@ public class ItemService {
         this.itemLocationService = itemLocationService;
     }
 
-    public Item getItemById(String id) {
+    public Item getItemById(String id) throws ResourceNotFound {
         return itemRepository.findById(id)
             .orElseThrow(
                 () -> new ResourceNotFound(
@@ -32,7 +32,7 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
-    public ItemLocation findItemLocation(String location){
+    public ItemLocation findItemLocation(String location) throws ResourceNotFound {
         return itemLocationService.findLocation(location);
     }
 }

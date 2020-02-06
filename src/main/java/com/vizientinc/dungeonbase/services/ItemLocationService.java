@@ -20,7 +20,7 @@ public class ItemLocationService {
         this.locationRepository = locationRepository;
     }
 
-    public ItemLocation findLocation(String id){
+    public ItemLocation findLocation(String id) throws ResourceNotFound {
         ItemLocation itemLocation = playerRepository.findById(id).orElse(null);
         if(itemLocation != null){
             return itemLocation;

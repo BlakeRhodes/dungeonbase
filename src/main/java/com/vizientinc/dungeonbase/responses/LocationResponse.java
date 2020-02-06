@@ -3,6 +3,7 @@ package com.vizientinc.dungeonbase.responses;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.vizientinc.dungeonbase.controllers.ItemController;
 import com.vizientinc.dungeonbase.controllers.LocationController;
+import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
 import com.vizientinc.dungeonbase.models.Item;
 import com.vizientinc.dungeonbase.models.Location;
 import com.vizientinc.dungeonbase.models.Player;
@@ -29,7 +30,7 @@ public class LocationResponse extends RepresentationModel<LocationResponse> {
         List<Location> adjacentLocations,
         List<Player> players,
         List<Item> items
-    ) {
+    ) throws ResourceNotFound {
         this.id = location.getId();
         this.name = location.getName();
         this.description = location.getDescription();

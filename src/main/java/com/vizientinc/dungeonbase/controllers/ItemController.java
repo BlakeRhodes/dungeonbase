@@ -1,5 +1,6 @@
 package com.vizientinc.dungeonbase.controllers;
 
+import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
 import com.vizientinc.dungeonbase.models.Item;
 import com.vizientinc.dungeonbase.requests.ItemRequest;
 import com.vizientinc.dungeonbase.responses.ItemResponse;
@@ -18,16 +19,19 @@ public class ItemController {
     }
 
     @GetMapping("/{id}")
-    public ItemResponse get(@PathVariable String id) {
+    public ItemResponse get(@PathVariable String id) throws ResourceNotFound {
         Item item = itemService.getItemById(id);
         return new ItemResponse(item, itemService.findItemLocation(item.getLocation()));
     }
 
     @PostMapping
-    public ItemResponse post(@RequestBody ItemRequest itemRequest) {
+    public ItemResponse post(@RequestBody ItemRequest itemRequest) throws ResourceNotFound {
         Item item = itemService.save(
             new Item(itemRequest)
         );
-        return new ItemResponse(item, itemService.findItemLocation(item.getLocation()));
+        return new ItemResponse(
+            item,
+            itemService.findItemLocation(item.getLocation())
+        );
     }
 }

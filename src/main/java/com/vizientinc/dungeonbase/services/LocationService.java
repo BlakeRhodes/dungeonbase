@@ -46,7 +46,7 @@ public class LocationService {
         );
     }
 
-    public LocationResponse findByPlayerId(String playerId){
+    public LocationResponse findByPlayerId(String playerId) throws ResourceNotFound {
         return findById(playerService.findById(playerId).getLocation());
     }
 }

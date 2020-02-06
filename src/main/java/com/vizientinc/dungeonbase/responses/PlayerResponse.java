@@ -1,8 +1,8 @@
 package com.vizientinc.dungeonbase.responses;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vizientinc.dungeonbase.controllers.LocationController;
+import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
 import com.vizientinc.dungeonbase.models.Player;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,7 +20,7 @@ public class PlayerResponse extends RepresentationModel<PlayerResponse> {
     private final String location;
 
     @JsonCreator
-    public PlayerResponse(Player player) {
+    public PlayerResponse(Player player) throws ResourceNotFound {
         this.id = player.getId();
         this.name = player.getName();
         this.location = player.getLocation();
