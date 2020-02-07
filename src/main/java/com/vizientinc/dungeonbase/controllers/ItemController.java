@@ -21,7 +21,7 @@ public class ItemController {
     @GetMapping("/{id}")
     public ItemResponse get(@PathVariable String id) throws ResourceNotFound {
         Item item = itemService.getItemById(id);
-        return new ItemResponse(item, itemService.findItemLocation(item.getLocation()));
+        return getItemResponse(item);
     }
 
     @PostMapping
@@ -29,6 +29,19 @@ public class ItemController {
         Item item = itemService.save(
             new Item(itemRequest)
         );
+        return getItemResponse(item);
+    }
+
+    @PutMapping
+    public ItemResponse put(@RequestBody ItemRequest itemRequest) throws ResourceNotFound {
+        Item item = itemService.getItemById(itemRequest.getId());
+        item.update(itemRequest);
+        item = itemService.save(item);
+
+        return getItemResponse(item);
+    }
+
+    private ItemResponse getItemResponse(Item item) throws ResourceNotFound {
         return new ItemResponse(
             item,
             itemService.findItemLocation(item.getLocation())

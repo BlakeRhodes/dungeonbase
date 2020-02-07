@@ -1,6 +1,6 @@
 package com.vizientinc.dungeonbase.models;
 
-import com.vizientinc.dungeonbase.controllers.LocationController;
+import com.vizientinc.dungeonbase.controllers.PlayerController;
 import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
 import com.vizientinc.dungeonbase.interfaces.ItemLocation;
 import com.vizientinc.dungeonbase.requests.PlayerRequest;
@@ -33,6 +33,6 @@ public class Player implements ItemLocation {
 
     @Override
     public WebMvcLinkBuilder getLink() throws ResourceNotFound {
-        return linkTo(methodOn(LocationController.class).get(id));
+        return linkTo(methodOn(PlayerController.class).get(id));
     }
 }

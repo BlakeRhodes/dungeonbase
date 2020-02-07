@@ -21,4 +21,10 @@ public class Item {
         this.description = itemRequest.getDescription();
         this.location = itemRequest.getLocation();
     }
+
+    public void update(ItemRequest itemRequest) {
+        this.name = itemRequest.getName();
+        this.description = itemRequest.getDescription();
+        this.location = itemRequest.getLocation();
+    }
 }
