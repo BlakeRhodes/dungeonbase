@@ -41,6 +41,11 @@ public class ItemController {
         return getItemResponse(item);
     }
 
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String id) throws ResourceNotFound {
+        itemService.delete(id);
+    }
+
     private ItemResponse getItemResponse(Item item) throws ResourceNotFound {
         return new ItemResponse(
             item,

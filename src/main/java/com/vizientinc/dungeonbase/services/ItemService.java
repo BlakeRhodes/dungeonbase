@@ -6,6 +6,11 @@ import com.vizientinc.dungeonbase.interfaces.ItemLocation;
 import com.vizientinc.dungeonbase.repositories.ItemRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class ItemService {
     private final ItemRepository itemRepository;
@@ -34,5 +39,14 @@ public class ItemService {
 
     public ItemLocation findItemLocation(String location) throws ResourceNotFound {
         return itemLocationService.findLocation(location);
+    }
+
+    public List<String> findItemsAtLocation(String location){
+        return itemRepository.findAllByLocation(location).stream()
+            .map(Item::getId).collect(toList());
+    }
+
+    public void delete(String id) throws ResourceNotFound {
+        itemRepository.delete(getItemById(id));
     }
 }
