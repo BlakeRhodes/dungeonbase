@@ -8,7 +8,7 @@ import com.vizientinc.dungeonbase.services.ItemService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("items")
+@RequestMapping("v1/items")
 public class ItemController {
     private final ItemService itemService;
 

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("players")
+@RequestMapping("v1/players")
 public class PlayerController {
     private final PlayerService playerService;
     private final ItemService itemService;

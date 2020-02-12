@@ -17,7 +17,7 @@ public class PlayerLocationController {
         this.locationService = locationService;
     }
 
-    @GetMapping("players/{playerId}/locations")
+    @GetMapping("v1/players/{playerId}/locations")
     public LocationResponse get(@PathVariable String playerId) throws ResourceNotFound {
         return locationService.findByPlayerId(playerId);
     }
