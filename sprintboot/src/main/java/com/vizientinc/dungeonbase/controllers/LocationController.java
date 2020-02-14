@@ -3,6 +3,7 @@ package com.vizientinc.dungeonbase.controllers;
 import com.vizientinc.dungeonbase.requests.LocactionRequest;
 import com.vizientinc.dungeonbase.responses.LocationResponse;
 import com.vizientinc.dungeonbase.services.LocationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 public class LocationController {
     private final LocationService locationService;
 
+    @Autowired
     public LocationController(
         LocationService locationService
     ) {
@@ -26,9 +28,7 @@ public class LocationController {
     @GetMapping("/{id}")
     public LocationResponse get(@PathVariable String id) throws Exception {
 
-        LocationResponse locationResponse = locationService.findById(id)
-            .get();
-        return locationResponse;
+        return locationService.findById(id);
     }
 
     @PostMapping

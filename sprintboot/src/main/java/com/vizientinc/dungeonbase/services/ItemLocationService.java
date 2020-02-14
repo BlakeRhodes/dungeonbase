@@ -4,6 +4,7 @@ import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
 import com.vizientinc.dungeonbase.interfaces.ItemLocation;
 import com.vizientinc.dungeonbase.repositories.LocationRepository;
 import com.vizientinc.dungeonbase.repositories.PlayerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,7 @@ public class ItemLocationService {
     private final PlayerRepository playerRepository;
     private final LocationRepository locationRepository;
 
+    @Autowired
     public ItemLocationService(
         PlayerRepository playerRepository,
         LocationRepository locationRepository

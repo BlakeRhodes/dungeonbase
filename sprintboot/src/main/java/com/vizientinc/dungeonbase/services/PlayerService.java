@@ -6,6 +6,7 @@ import com.vizientinc.dungeonbase.models.PlayerRecord;
 import com.vizientinc.dungeonbase.repositories.LocationRepository;
 import com.vizientinc.dungeonbase.repositories.PlayerRepository;
 import com.vizientinc.dungeonbase.requests.PlayerRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class PlayerService {
     private final LocationRepository locationRepository;
     private final ItemService itemService;
 
+    @Autowired
     public PlayerService(
         PlayerRepository playerRepository,
         LocationRepository locationRepository,
@@ -28,21 +30,18 @@ public class PlayerService {
         this.itemService = itemService;
     }
 
-    @Async
-    public CompletableFuture<Player> findById(String id) throws Exception {
-            return CompletableFuture.completedFuture(new Player(
+    public Player findById(String id) throws Exception {
+            return new Player(
                 playerRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFound(
                         "Player",
                         id
                     )),
                 itemService.findItemsAtLocation(id)
-                    .get()
-            ));
+            );
     }
 
-    @Async
-    public CompletableFuture<Player> save(PlayerRequest playerRequest) throws Exception {
+    public Player save(PlayerRequest playerRequest) throws Exception {
         PlayerRecord playerRecord = new PlayerRecord(playerRequest);
 
         playerRecord.setLocation(
@@ -50,24 +49,20 @@ public class PlayerService {
                 .getId()
         );
 
-            return CompletableFuture.completedFuture(new Player(
+            return new Player(
                 playerRepository.save(playerRecord),
                 itemService.findItemsAtLocation(playerRecord.getId())
-                    .get()
-            ));
+            );
     }
 
-    @Async
-    public CompletableFuture<Player> updatePlayer(PlayerRequest playerRequest) throws Exception {
+    public Player updatePlayer(PlayerRequest playerRequest) throws Exception {
         PlayerRecord playerRecord = findById(playerRequest.getId())
-            .get()
             .getPlayerRecord();
         playerRecord.update(playerRequest);
-        return CompletableFuture.completedFuture(new Player(
+        return new Player(
             playerRepository.save(playerRecord),
             itemService.findItemsAtLocation(playerRecord.getId())
-                .get()
-        ));
+        );
     }
 
     public List<PlayerRecord> findByLocation(String locationId) {

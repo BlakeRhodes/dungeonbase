@@ -27,21 +27,21 @@ public class PlayerController {
     public PlayerResponse get(@PathVariable String id) throws Exception {
 
         return new PlayerResponse(
-            playerService.findById(id).get()
+            playerService.findById(id)
         );
     }
 
     @PostMapping
     public PlayerResponse post(@RequestBody PlayerRequest playerRequest) throws Exception {
         return new PlayerResponse(
-            playerService.save(playerRequest).get()
+            playerService.save(playerRequest)
         );
     }
 
     @PutMapping
     public PlayerResponse put(@RequestBody PlayerRequest playerRequest) throws Exception {
         return new PlayerResponse(
-            playerService.updatePlayer(playerRequest).get()
+            playerService.updatePlayer(playerRequest)
         );
     }
 

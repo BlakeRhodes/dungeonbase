@@ -5,12 +5,9 @@ import com.vizientinc.dungeonbase.models.LocationRecord;
 import com.vizientinc.dungeonbase.repositories.ItemRepository;
 import com.vizientinc.dungeonbase.repositories.LocationRepository;
 import com.vizientinc.dungeonbase.responses.LocationResponse;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.CompletableFuture;
-
-import static java.util.concurrent.CompletableFuture.completedFuture;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -19,6 +16,7 @@ public class LocationService {
     private final PlayerService playerService;
     private final ItemRepository itemRepository;
 
+    @Autowired
     public LocationService(
         LocationRepository locationRepository,
         PlayerService playerService,
@@ -29,8 +27,7 @@ public class LocationService {
         this.itemRepository = itemRepository;
     }
 
-    @Async
-    public CompletableFuture<LocationResponse> findById(
+    public LocationResponse findById(
         String id
     ) throws Exception {
         LocationRecord locationRecord = locationRepository.findById(id)
@@ -39,8 +36,7 @@ public class LocationService {
                 id
             ));
 
-
-        return completedFuture(new LocationResponse(
+        return new LocationResponse(
             locationRecord,
             locationRecord.getRelated()
                 .stream()
@@ -48,10 +44,11 @@ public class LocationService {
                 .collect(toList()),
             playerService.findByLocation(locationRecord.getId()),
             itemRepository.findAllByLocation(locationRecord.getId())
-        ));
+        );
     }
 
     public LocationResponse findByPlayerId(String playerId) throws Exception {
-        return findById(playerService.findById(playerId).get().getLocationId()).get();
+        return findById(playerService.findById(playerId)
+                            .getLocationId());
     }
 }
