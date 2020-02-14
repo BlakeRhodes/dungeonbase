@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using dungeonbase.Models;
 using dungeonbase.Services;
 using Microsoft.AspNetCore.Mvc;
-using RiskFirst.Hateoas;
 
 namespace dungeonbase.Controllers
 {
@@ -13,29 +11,25 @@ namespace dungeonbase.Controllers
     public class LocationsController : ControllerBase
     {
         private readonly LocationService _locationService;
-        private readonly ILinksService _linksService;
 
         public LocationsController(
-            LocationService locationService,
-            ILinksService linksService
+            LocationService locationService
         )
         {
             _locationService = locationService;
-            _linksService = linksService;
         }
 
         [HttpGet]
-        public List<Location> Get()
+        public List<LocationRecord> Get()
         {
            var locations = _locationService.Get();
            return locations;
         }
 
         [HttpGet("{id}", Name = "GetLocationsRoute")]
-        public async Task<Location> Get(string id)
+        public async Task<LocationRecord> Get(string id)
         {
             var location = _locationService.Get(id);
-            await _linksService.AddLinksAsync(location);
             return location;
         }
     }

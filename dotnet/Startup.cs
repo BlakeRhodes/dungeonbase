@@ -1,4 +1,3 @@
-using dungeonbase.Models;
 using dungeonbase.Models.DatabaseSettings.BooksApi.Models;
 using dungeonbase.Models.Interfaces;
 using dungeonbase.Services;
@@ -8,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using RiskFirst.Hateoas;
 
 namespace dungeonbase
 {
@@ -28,15 +26,6 @@ namespace dungeonbase
             services.Configure<DungeonbaseDatabaseSettings>(
                 Configuration.GetSection(nameof(DungeonbaseDatabaseSettings)));
 
-
-            services.AddLinks(config =>
-            {
-                config.AddPolicy<Location>(policy =>
-                {
-                    policy.RequireSelfLink();
-                });
-            });
-            
             services.AddSingleton<IDungeonbaseDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<DungeonbaseDatabaseSettings>>().Value);
 

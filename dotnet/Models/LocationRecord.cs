@@ -8,7 +8,7 @@ namespace dungeonbase.Models
 {
     [BsonIgnoreExtraElements]
     [Serializable]
-    public class Location : LinkContainer
+    public class LocationRecord
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
