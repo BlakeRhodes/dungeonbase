@@ -9,14 +9,14 @@ import org.springframework.data.annotation.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+public class ItemRecord {
     @Id
     String id;
     String name;
     String description;
     String location;
 
-    public Item(ItemRequest itemRequest){
+    public ItemRecord(ItemRequest itemRequest){
         this.name = itemRequest.getName();
         this.description = itemRequest.getDescription();
         this.location = itemRequest.getLocation();

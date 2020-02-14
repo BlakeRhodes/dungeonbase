@@ -1,51 +1,52 @@
 package com.vizientinc.dungeonbase.controllers;
 
-import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
-import com.vizientinc.dungeonbase.services.ItemService;
-import com.vizientinc.dungeonbase.services.PlayerService;
 import com.vizientinc.dungeonbase.requests.PlayerRequest;
 import com.vizientinc.dungeonbase.responses.PlayerResponse;
+import com.vizientinc.dungeonbase.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("v1/players")
 public class PlayerController {
     private final PlayerService playerService;
-    private final ItemService itemService;
 
     @Autowired
-    public PlayerController(
-        PlayerService playerService,
-        ItemService itemService
-    ) {
+    public PlayerController(PlayerService playerService) {
         this.playerService = playerService;
-        this.itemService = itemService;
+    }
+
+    @GetMapping
+    public List<PlayerResponse> get(){
+        return null;
     }
 
     @GetMapping("/{id}")
-    public PlayerResponse get(@PathVariable String id) throws ResourceNotFound {
+    public PlayerResponse get(@PathVariable String id) throws Exception {
 
         return new PlayerResponse(
-            playerService.findById(id),
-            itemService.findItemsAtLocation(id)
+            playerService.findById(id).get()
         );
     }
 
     @PostMapping
-    public PlayerResponse post(@RequestBody PlayerRequest playerRequest) throws ResourceNotFound {
-        return getPlayerResponse(playerRequest);
+    public PlayerResponse post(@RequestBody PlayerRequest playerRequest) throws Exception {
+        return new PlayerResponse(
+            playerService.save(playerRequest).get()
+        );
     }
 
     @PutMapping
-    public PlayerResponse put(@RequestBody PlayerRequest playerRequest) throws ResourceNotFound {
-        return getPlayerResponse(playerRequest);
-    }
-
-    private PlayerResponse getPlayerResponse(PlayerRequest playerRequest) throws ResourceNotFound {
+    public PlayerResponse put(@RequestBody PlayerRequest playerRequest) throws Exception {
         return new PlayerResponse(
-            playerService.save(playerRequest),
-            itemService.findItemsAtLocation(playerRequest.getId())
+            playerService.updatePlayer(playerRequest).get()
         );
     }
+
+    @DeleteMapping("{id}")
+    public void delete(String id){
+    }
+
 }

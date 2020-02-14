@@ -1,15 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using dungeonbase.Models;
+using dungeonbase.Models.DatabaseSettings.BooksApi.Models;
+using dungeonbase.Models.Interfaces;
+using dungeonbase.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using RiskFirst.Hateoas;
 
 namespace dungeonbase
 {
@@ -25,6 +24,23 @@ namespace dungeonbase
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // requires using Microsoft.Extensions.Options
+            services.Configure<DungeonbaseDatabaseSettings>(
+                Configuration.GetSection(nameof(DungeonbaseDatabaseSettings)));
+
+
+            services.AddLinks(config =>
+            {
+                config.AddPolicy<Location>(policy =>
+                {
+                    policy.RequireSelfLink();
+                });
+            });
+            
+            services.AddSingleton<IDungeonbaseDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<DungeonbaseDatabaseSettings>>().Value);
+
+            services.AddSingleton<LocationService>();
             services.AddControllers();
         }
 

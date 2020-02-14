@@ -1,12 +1,16 @@
 package com.vizientinc.dungeonbase.services;
 
 import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
-import com.vizientinc.dungeonbase.models.Location;
+import com.vizientinc.dungeonbase.models.LocationRecord;
 import com.vizientinc.dungeonbase.repositories.ItemRepository;
 import com.vizientinc.dungeonbase.repositories.LocationRepository;
 import com.vizientinc.dungeonbase.responses.LocationResponse;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.CompletableFuture;
+
+import static java.util.concurrent.CompletableFuture.completedFuture;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -25,28 +29,29 @@ public class LocationService {
         this.itemRepository = itemRepository;
     }
 
-    public LocationResponse findById(
+    @Async
+    public CompletableFuture<LocationResponse> findById(
         String id
-    ) throws ResourceNotFound {
-        Location location = locationRepository.findById(id)
+    ) throws Exception {
+        LocationRecord locationRecord = locationRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFound(
                 "Location",
                 id
             ));
 
 
-        return new LocationResponse(
-            location,
-            location.getRelated()
+        return completedFuture(new LocationResponse(
+            locationRecord,
+            locationRecord.getRelated()
                 .stream()
                 .map(locationRepository::findByName)
                 .collect(toList()),
-            playerService.findByLocation(location.getId()),
-            itemRepository.findAllByLocation(location.getId())
-        );
+            playerService.findByLocation(locationRecord.getId()),
+            itemRepository.findAllByLocation(locationRecord.getId())
+        ));
     }
 
-    public LocationResponse findByPlayerId(String playerId) throws ResourceNotFound {
-        return findById(playerService.findById(playerId).getLocation());
+    public LocationResponse findByPlayerId(String playerId) throws Exception {
+        return findById(playerService.findById(playerId).get().getLocationId()).get();
     }
 }

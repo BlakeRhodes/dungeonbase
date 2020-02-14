@@ -1,7 +1,6 @@
 package com.vizientinc.dungeonbase.models;
 
 import com.vizientinc.dungeonbase.controllers.PlayerController;
-import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
 import com.vizientinc.dungeonbase.interfaces.ItemLocation;
 import com.vizientinc.dungeonbase.requests.PlayerRequest;
 import lombok.AllArgsConstructor;
@@ -16,13 +15,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Player implements ItemLocation {
+public class PlayerRecord implements ItemLocation {
     @Id
     String id;
     String name;
     String location;
 
-    public Player(PlayerRequest playerRequest) {
+    public PlayerRecord(PlayerRequest playerRequest) {
         name = playerRequest.getName();
     }
 
@@ -32,7 +31,7 @@ public class Player implements ItemLocation {
     }
 
     @Override
-    public WebMvcLinkBuilder getLink() throws ResourceNotFound {
+    public WebMvcLinkBuilder getLink() throws Exception {
         return linkTo(methodOn(PlayerController.class).get(id));
     }
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\BRHODES\.Rider2019.3\config\scratches" t="IncludeRecursive" />
+    <e p="C:\Users\BRHODES\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\BRHODES\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_.19.00" t="ExcludeRecursive" />
+    <e p="C:\Users\BRHODES\Documents\source\dungeonbase\dotnet" t="IncludeRecursive">
+      <e p="appsettings.Development.json" t="Include" />
+      <e p="appsettings.json" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Controllers" t="Include">
+        <e p="WeatherForecastController.cs" t="Include" />
+      </e>
+      <e p="dungeonbase.csproj" t="IncludeRecursive" />
+      <e p="Folder.DotSettings" t="Include" />
+      <e p="Models" t="Include">
+        <e p="DatabaseSettings" t="Include">
+          <e p="DungeonbaseDatabaseSettings.cs" t="Include" />
+        </e>
+        <e p="Interfaces" t="Include">
+          <e p="IDbModel.cs" t="Include" />
+          <e p="IDungeonbaseDatabaseSettings.cs" t="Include" />
+        </e>
+        <e p="Item.cs" t="Include" />
+        <e p="Location.cs" t="Include" />
+        <e p="Player.cs" t="Include" />
+      </e>
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="netcoreapp3.1" t="Include">
+            <e p="dungeonbase.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="launchSettings.json" t="Include" />
+      </e>
+      <e p="Services" t="Include">
+        <e p="LocationService.cs" t="Include" />
+        <e p="ModelService.cs" t="Include" />
+      </e>
+      <e p="Startup.cs" t="Include" />
+      <e p="WeatherForecast.cs" t="Include" />
+    </e>
+  </component>
+</project>

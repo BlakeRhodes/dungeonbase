@@ -3,8 +3,8 @@ package com.vizientinc.dungeonbase.responses;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.vizientinc.dungeonbase.controllers.ItemController;
 import com.vizientinc.dungeonbase.controllers.LocationController;
-import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
-import com.vizientinc.dungeonbase.models.Player;
+import com.vizientinc.dungeonbase.domains.Player;
+import com.vizientinc.dungeonbase.models.PlayerRecord;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
@@ -25,13 +25,12 @@ public class PlayerResponse extends RepresentationModel<PlayerResponse> {
 
     @JsonCreator
     public PlayerResponse(
-        Player player,
-        List<String> items
-    ) throws ResourceNotFound {
+        Player player
+    ) throws Exception {
         this.id = player.getId();
         this.name = player.getName();
-        this.location = player.getLocation();
-        this.items = items;
+        this.location = player.getLocationId();
+        this.items = player.getInventory();
 
         this.add(
             player.getLink()
@@ -39,7 +38,7 @@ public class PlayerResponse extends RepresentationModel<PlayerResponse> {
         );
 
         this.add(
-            linkTo(methodOn(LocationController.class).get(player.getLocation()))
+            linkTo(methodOn(LocationController.class).get(player.getLocationId()))
             .withRel("location")
         );
 

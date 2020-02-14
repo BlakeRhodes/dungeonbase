@@ -29,6 +29,20 @@
   },
   "frameworks": {
     "netcoreapp3.1": {
+      "dependencies": {
+        "MongoDB.Driver": {
+          "target": "Package",
+          "version": "[2.10.1, )"
+        },
+        "RiskFirst.Hateoas": {
+          "target": "Package",
+          "version": "[3.1.1, )"
+        },
+        "RiskFirst.Hateoas.Models": {
+          "target": "Package",
+          "version": "[3.1.1, )"
+        }
+      },
       "imports": [
         "net461",
         "net462",

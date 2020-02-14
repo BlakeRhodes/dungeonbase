@@ -3,10 +3,9 @@ package com.vizientinc.dungeonbase.responses;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.vizientinc.dungeonbase.controllers.ItemController;
 import com.vizientinc.dungeonbase.controllers.LocationController;
-import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
-import com.vizientinc.dungeonbase.models.Item;
-import com.vizientinc.dungeonbase.models.Location;
-import com.vizientinc.dungeonbase.models.Player;
+import com.vizientinc.dungeonbase.models.ItemRecord;
+import com.vizientinc.dungeonbase.models.LocationRecord;
+import com.vizientinc.dungeonbase.models.PlayerRecord;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
@@ -26,38 +25,38 @@ public class LocationResponse extends RepresentationModel<LocationResponse> {
 
     @JsonCreator
     public LocationResponse(
-        Location location,
-        List<Location> adjacentLocations,
-        List<Player> players,
-        List<Item> items
-    ) throws ResourceNotFound {
-        this.id = location.getId();
-        this.name = location.getName();
-        this.description = location.getDescription();
-        this.related = location.getRelated();
+        LocationRecord locationRecord,
+        List<LocationRecord> adjacentLocationRecords,
+        List<PlayerRecord> playerRecords,
+        List<ItemRecord> itemRecords
+    ) throws Exception {
+        this.id = locationRecord.getId();
+        this.name = locationRecord.getName();
+        this.description = locationRecord.getDescription();
+        this.related = locationRecord.getRelated();
 
         this.add(
-            linkTo(methodOn(LocationController.class).get(location.getId()))
+            linkTo(methodOn(LocationController.class).get(locationRecord.getId()))
                 .withSelfRel()
         );
 
-        for(Location adjacentLocation : adjacentLocations) {
+        for(LocationRecord adjacentLocationRecord : adjacentLocationRecords) {
             this.add(
-                adjacentLocation.getLink()
-                    .withRel(adjacentLocation.getName())
+                adjacentLocationRecord.getLink()
+                    .withRel(adjacentLocationRecord.getName())
             );
         }
 
-        for(Player player : players) {
+        for(PlayerRecord playerRecord : playerRecords) {
             this.add(
-                player.getLink()
+                playerRecord.getLink()
                     .withRel("players")
             );
         }
 
-        for(Item item : items) {
+        for(ItemRecord itemRecord : itemRecords) {
             this.add(
-                linkTo(methodOn(ItemController.class).get(item.getId()))
+                linkTo(methodOn(ItemController.class).get(itemRecord.getId()))
                     .withRel("items")
             );
         }

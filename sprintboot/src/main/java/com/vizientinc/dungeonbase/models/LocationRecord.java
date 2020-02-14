@@ -1,7 +1,6 @@
 package com.vizientinc.dungeonbase.models;
 
 import com.vizientinc.dungeonbase.controllers.LocationController;
-import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
 import com.vizientinc.dungeonbase.interfaces.ItemLocation;
 import lombok.Data;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -12,20 +11,20 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Data
-public class Location implements ItemLocation {
+public class LocationRecord implements ItemLocation {
     String id;
     String name;
     String description;
     List<String> related;
 
-    public Location(String name, String description, List<String> related){
+    public LocationRecord(String name, String description, List<String> related){
         this.setName(name);
         this.setDescription(description);
         this.setRelated(related);
     }
 
     @Override
-    public WebMvcLinkBuilder getLink() throws ResourceNotFound {
+    public WebMvcLinkBuilder getLink() throws Exception {
         return linkTo(methodOn(LocationController.class).get(id));
     }
 }
