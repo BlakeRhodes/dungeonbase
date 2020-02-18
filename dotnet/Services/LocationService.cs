@@ -1,44 +1,54 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using dungeonbase.Domains;
 using dungeonbase.Models;
-using dungeonbase.Models.Interfaces;
-using MongoDB.Driver;
+using dungeonbase.Repositories;
 
 namespace dungeonbase.Services
 {
     public class LocationService
     {
-        private readonly IMongoCollection<LocationRecord> _models;
+        private readonly LocationRepository _locationRepository;
 
-        public LocationService(IDungeonbaseDatabaseSettings settings)
+        public LocationService(LocationRepository locationRepository)
         {
-            _models = GetDatabase(settings).GetCollection<LocationRecord>(settings.LocationsCollectionName);
+            _locationRepository = locationRepository;
         }
 
-        public List<LocationRecord> Get() =>
-            _models.Find(model => true).ToList();
-
-        public LocationRecord Get(string id) =>
-            _models.Find(model => model.Id== id).FirstOrDefault();
-
-        public LocationRecord Create(LocationRecord model)
+        public Location FindById(string id)
         {
-            _models.InsertOne(model);
-            return model;
+            var record = _locationRepository.Get(id);
+            var related = GetRelated(record);
+            
+            return new Location
+            {
+                Id = record.Id,
+                Description = record.Description,
+                Name = record.Name,
+                Related = related
+            };
         }
 
-        public void Update(string id, LocationRecord modelIn) =>
-            _models.ReplaceOne(model => model.Id == id, modelIn);
-
-        public void Remove(LocationRecord modelIn) =>
-            _models.DeleteOne(model => model.Id == modelIn.Id);
-
-        public void Remove(string id) => 
-            _models.DeleteOne(model => model.Id == id);
-
-        protected static IMongoDatabase GetDatabase(IDungeonbaseDatabaseSettings settings)
+        private List<LocationRecord> GetRelated(LocationRecord record)
         {
-            var client = new MongoClient(settings.ConnectionString);
-            return client.GetDatabase(settings.DatabaseName);
+            return record.Related
+                .Select(name => _locationRepository.GetByName(name))
+                .ToList();
+        }
+
+        public List<Location> GetAll()
+        {
+            return _locationRepository.Get().Select(record =>
+            {
+                var related = GetRelated(record);
+                return new Location
+                {
+                    Id = record.Id,
+                    Description = record.Description,
+                    Name = record.Name,
+                    Related = related
+                };
+            }).ToList();
         }
     }
 }

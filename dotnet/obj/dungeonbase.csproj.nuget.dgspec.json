@@ -44,14 +44,6 @@
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[2.10.1, )"
-            },
-            "RiskFirst.Hateoas": {
-              "target": "Package",
-              "version": "[3.1.1, )"
-            },
-            "RiskFirst.Hateoas.Models": {
-              "target": "Package",
-              "version": "[3.1.1, )"
             }
           },
           "imports": [

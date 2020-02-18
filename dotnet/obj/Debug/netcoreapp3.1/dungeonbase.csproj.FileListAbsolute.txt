@@ -23,13 +23,3 @@ C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\bin\Debug\netcoreapp3.1\Mon
 C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\bin\Debug\netcoreapp3.1\MongoDB.Libmongocrypt.dll
 C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\bin\Debug\netcoreapp3.1\SharpCompress.dll
 C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\obj\Debug\netcoreapp3.1\dungeonbase.csproj.CopyComplete
-C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
-C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
-C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
-C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
-C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\bin\Debug\netcoreapp3.1\RiskFirst.Hateoas.dll
-C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\bin\Debug\netcoreapp3.1\RiskFirst.Hateoas.Models.dll
-C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\bin\Debug\netcoreapp3.1\System.Security.Cryptography.Pkcs.dll
-C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Cryptography.Pkcs.dll
-C:\Users\BRHODES\Documents\source\dungeonbase\dotnet\obj\Debug\netcoreapp3.1\dungeonbase.MvcApplicationPartsAssemblyInfo.cs

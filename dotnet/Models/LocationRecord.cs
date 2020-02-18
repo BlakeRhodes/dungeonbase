@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using RiskFirst.Hateoas.Models;
 
 namespace dungeonbase.Models
 {

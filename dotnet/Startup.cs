@@ -1,5 +1,6 @@
 using dungeonbase.Models.DatabaseSettings.BooksApi.Models;
 using dungeonbase.Models.Interfaces;
+using dungeonbase.Repositories;
 using dungeonbase.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,8 +29,8 @@ namespace dungeonbase
 
             services.AddSingleton<IDungeonbaseDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<DungeonbaseDatabaseSettings>>().Value);
-
-            services.AddSingleton<LocationService>();
+            services.AddScoped<LocationService>();
+            services.AddSingleton<LocationRepository>();
             services.AddControllers();
         }
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using dungeonbase.Models;
+using System.Linq;
+using dungeonbase.Responses;
 using dungeonbase.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +12,8 @@ namespace dungeonbase.Controllers
     {
         private readonly LocationService _locationService;
 
-        public LocationsController(
+        public LocationsController
+        (
             LocationService locationService
         )
         {
@@ -20,17 +21,19 @@ namespace dungeonbase.Controllers
         }
 
         [HttpGet]
-        public List<LocationRecord> Get()
+        public List<LocationResponse> Get()
         {
-           var locations = _locationService.Get();
-           return locations;
+            var locations = _locationService.GetAll().Select(record => new LocationResponse(record)).ToList();
+            
+            return locations;
         }
 
-        [HttpGet("{id}", Name = "GetLocationsRoute")]
-        public async Task<LocationRecord> Get(string id)
+        [HttpGet]
+        [Route("{id}")]
+        public LocationResponse Get(string id)
         {
-            var location = _locationService.Get(id);
-            return location;
+            var location = _locationService.FindById(id);
+            return new LocationResponse(location);
         }
     }
 }

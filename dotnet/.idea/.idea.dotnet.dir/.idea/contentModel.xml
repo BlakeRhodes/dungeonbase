@@ -11,8 +11,14 @@
       <e p="Controllers" t="Include">
         <e p="LocationsController.cs" t="Include" />
       </e>
+      <e p="Domains" t="Include">
+        <e p="Location.cs" t="Include" />
+      </e>
       <e p="dungeonbase.csproj" t="IncludeRecursive" />
       <e p="Folder.DotSettings" t="Include" />
+      <e p="Hateoas" t="Include">
+        <e p="HateaosContainer.cs" t="Include" />
+      </e>
       <e p="Models" t="Include">
         <e p="DatabaseSettings" t="Include">
           <e p="DungeonbaseDatabaseSettings.cs" t="Include" />
@@ -35,6 +41,12 @@
       <e p="Program.cs" t="Include" />
       <e p="Properties" t="Include">
         <e p="launchSettings.json" t="Include" />
+      </e>
+      <e p="Repositories" t="Include">
+        <e p="LocationRepository.cs" t="Include" />
+      </e>
+      <e p="Responses" t="Include">
+        <e p="LocationResponse.cs" t="Include" />
       </e>
       <e p="Services" t="Include">
         <e p="LocationService.cs" t="Include" />
