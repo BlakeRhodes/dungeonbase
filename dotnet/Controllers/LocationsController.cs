@@ -3,6 +3,7 @@ using System.Linq;
 using dungeonbase.Responses;
 using dungeonbase.Services;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace dungeonbase.Controllers
 {
@@ -21,6 +22,11 @@ namespace dungeonbase.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(
+            Summary = "Returns a List of all Locations",
+            Description = "This returns all of the locations in the database as a list.",
+            OperationId = "Get"
+        )]
         public List<LocationResponse> Get()
         {
             var locations = _locationService.GetAll().Select(record => new LocationResponse(record)).ToList();
@@ -28,6 +34,12 @@ namespace dungeonbase.Controllers
             return locations;
         }
 
+        [HttpGet]
+        [SwaggerOperation(
+            Summary = "Returns a Location.",
+            Description = "This returns a location with the id that is passed to it.",
+            OperationId = "Get"
+        )]
         [HttpGet]
         [Route("{id}")]
         public LocationResponse Get(string id)

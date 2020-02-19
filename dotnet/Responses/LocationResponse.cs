@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
+using System.Transactions;
 using dungeonbase.Domains;
 using dungeonbase.Hateoas;
 using dungeonbase.Models;
 
 namespace dungeonbase.Responses
 {
-    public class LocationResponse : HateaosContainer
+    public class LocationResponse : HateoasContainer
     {
         public string Id { get; set; }
 
@@ -26,15 +27,28 @@ namespace dungeonbase.Responses
             Name = location.Name;
             Description = location.Description;
             
-            AddLink("self", $"https://localhost:5001/v1/locations/{Id}");
+            AddSelf();
             
             Related = location.Related.Select(relatedLocation =>
             {
-                AddLink(relatedLocation.Name, $"https://localhost:5001/v1/locations/{relatedLocation.Id}");
+                AddLink(relatedLocation.Name, GetPath()+$"/{relatedLocation.Id}");
                 return relatedLocation;
             }).Select(relatedLocation => relatedLocation.Name).ToList();
-            
-            
+        }
+
+        private string GetPath()
+        {
+            return "https://localhost:5001/v1/locations";
+        }
+        
+        private string GetPathToSelf()
+        {
+            return GetPath() + $"/{Id}";
+        }
+        
+        protected override void AddSelf()
+        {
+            AddLink("self", GetPathToSelf());
         }
     }
 }
