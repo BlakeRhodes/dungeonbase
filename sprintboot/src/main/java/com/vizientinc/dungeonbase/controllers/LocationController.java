@@ -2,7 +2,7 @@ package com.vizientinc.dungeonbase.controllers;
 
 import com.vizientinc.dungeonbase.requests.LocactionRequest;
 import com.vizientinc.dungeonbase.responses.LocationResponse;
-import com.vizientinc.dungeonbase.services.LocationService;
+import com.vizientinc.dungeonbase.services.LocationResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.hateoas.CollectionModel;
@@ -13,13 +13,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("v1/locations")
 public class LocationController {
-    private final LocationService locationService;
+    private final LocationResponseService locationResponseService;
 
     @Autowired
     public LocationController(
-        LocationService locationService
+        LocationResponseService locationResponseService
     ) {
-        this.locationService = locationService;
+        this.locationResponseService = locationResponseService;
     }
 
     @GetMapping
@@ -28,7 +28,7 @@ public class LocationController {
         @RequestParam(required = false) Optional<Integer> size
     ) throws Exception {
 
-        return locationService.findAll(PageRequest.of(
+        return locationResponseService.findAll(PageRequest.of(
             page.orElse(0),
             size.orElse(5)
         ));
@@ -37,7 +37,7 @@ public class LocationController {
     @GetMapping("/{id}")
     public LocationResponse get(@PathVariable String id) throws Exception {
 
-        return locationService.findById(id);
+        return locationResponseService.findById(id);
     }
 
     @PostMapping

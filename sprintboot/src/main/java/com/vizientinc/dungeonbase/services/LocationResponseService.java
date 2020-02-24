@@ -20,13 +20,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
-public class LocationService {
+public class LocationResponseService {
     private final LocationRepository locationRepository;
     private final PlayerService playerService;
     private final ItemRepository itemRepository;
 
     @Autowired
-    public LocationService(
+    public LocationResponseService(
         LocationRepository locationRepository,
         PlayerService playerService,
         ItemRepository itemRepository
