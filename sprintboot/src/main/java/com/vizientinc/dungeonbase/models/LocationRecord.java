@@ -4,6 +4,7 @@ import com.vizientinc.dungeonbase.controllers.LocationController;
 import com.vizientinc.dungeonbase.interfaces.ItemLocation;
 import com.vizientinc.dungeonbase.requests.LocactionRequest;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Data
+@NoArgsConstructor
 public class LocationRecord implements ItemLocation {
     String id;
     String name;
