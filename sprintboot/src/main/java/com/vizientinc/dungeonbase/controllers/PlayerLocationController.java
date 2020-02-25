@@ -1,7 +1,7 @@
 package com.vizientinc.dungeonbase.controllers;
 
 import com.vizientinc.dungeonbase.responses.LocationResponse;
-import com.vizientinc.dungeonbase.services.LocationResponseService;
+import com.vizientinc.dungeonbase.services.LocaitonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PlayerLocationController {
-    private final LocationResponseService locationResponseService;
+    private final LocaitonService locaitonService;
 
     @Autowired
     public PlayerLocationController(
-        LocationResponseService locationResponseService
+        LocaitonService locaitonService
     ) {
-        this.locationResponseService = locationResponseService;
+        this.locaitonService = locaitonService;
     }
 
     @GetMapping("v1/players/{playerId}/locations")
     public LocationResponse get(@PathVariable String playerId) throws Exception {
-        return locationResponseService.findByPlayerId(playerId);
+        return locaitonService.findByPlayerId(playerId);
     }
 }

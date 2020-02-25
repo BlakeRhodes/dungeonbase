@@ -2,6 +2,7 @@ package com.vizientinc.dungeonbase.models;
 
 import com.vizientinc.dungeonbase.controllers.LocationController;
 import com.vizientinc.dungeonbase.interfaces.ItemLocation;
+import com.vizientinc.dungeonbase.requests.LocactionRequest;
 import lombok.Data;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
@@ -21,6 +22,20 @@ public class LocationRecord implements ItemLocation {
         this.setName(name);
         this.setDescription(description);
         this.setRelated(related);
+    }
+
+    public LocationRecord(LocactionRequest locactionRequest){
+        copyFromRecord(locactionRequest);
+    }
+
+    public void update(LocactionRequest locactionRequest){
+        copyFromRecord(locactionRequest);
+    }
+
+    private void copyFromRecord(LocactionRequest locactionRequest) {
+        this.setName(locactionRequest.getName());
+        this.setDescription(locactionRequest.getDescription());
+        this.setRelated(locactionRequest.getRelated());
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.vizientinc.dungeonbase.handlers.exceptions.ResourceNotFound;
 import com.vizientinc.dungeonbase.models.LocationRecord;
 import com.vizientinc.dungeonbase.repositories.ItemRepository;
 import com.vizientinc.dungeonbase.repositories.LocationRepository;
+import com.vizientinc.dungeonbase.requests.LocactionRequest;
 import com.vizientinc.dungeonbase.responses.LocationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -20,13 +21,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
-public class LocationResponseService {
+public class LocaitonService {
     private final LocationRepository locationRepository;
     private final PlayerService playerService;
     private final ItemRepository itemRepository;
 
     @Autowired
-    public LocationResponseService(
+    public LocaitonService(
         LocationRepository locationRepository,
         PlayerService playerService,
         ItemRepository itemRepository
@@ -39,13 +40,21 @@ public class LocationResponseService {
     public LocationResponse findById(
         String id
     ) throws Exception {
-        LocationRecord locationRecord = locationRepository.findById(id)
+        LocationRecord locationRecord = getLocation(id);
+
+        return getLocationResponse(locationRecord);
+    }
+
+    public void delete(String id) {
+        locationRepository.deleteById(id);
+    }
+
+    private LocationRecord getLocation(String id) throws ResourceNotFound {
+        return locationRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFound(
                 "Location",
                 id
             ));
-
-        return getLocationResponse(locationRecord);
     }
 
     public LocationResponse findByPlayerId(String playerId) throws Exception {
@@ -92,6 +101,17 @@ public class LocationResponseService {
             ).withRel("previous"));
         }
         return result;
+    }
+
+    public LocationResponse save(LocactionRequest locationRequest) throws Exception {
+        LocationRecord record = locationRepository.save(new LocationRecord(locationRequest));
+        return findById(record.getId());
+    }
+
+    public LocationResponse update(LocactionRequest locationRequest) throws Exception {
+        LocationRecord record = getLocation(locationRequest.getId());
+        record.update(locationRequest);
+        return findById(record.getId());
     }
 
     private LocationResponse getLocationResponse(LocationRecord locationRecord) throws Exception {

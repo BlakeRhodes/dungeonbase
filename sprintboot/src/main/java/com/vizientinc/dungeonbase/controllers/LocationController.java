@@ -2,7 +2,7 @@ package com.vizientinc.dungeonbase.controllers;
 
 import com.vizientinc.dungeonbase.requests.LocactionRequest;
 import com.vizientinc.dungeonbase.responses.LocationResponse;
-import com.vizientinc.dungeonbase.services.LocationResponseService;
+import com.vizientinc.dungeonbase.services.LocaitonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.hateoas.CollectionModel;
@@ -13,13 +13,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("v1/locations")
 public class LocationController {
-    private final LocationResponseService locationResponseService;
+    private final LocaitonService locaitonService;
 
     @Autowired
     public LocationController(
-        LocationResponseService locationResponseService
+        LocaitonService locaitonService
     ) {
-        this.locationResponseService = locationResponseService;
+        this.locaitonService = locaitonService;
     }
 
     @GetMapping
@@ -28,7 +28,7 @@ public class LocationController {
         @RequestParam(required = false) Optional<Integer> size
     ) throws Exception {
 
-        return locationResponseService.findAll(PageRequest.of(
+        return locaitonService.findAll(PageRequest.of(
             page.orElse(0),
             size.orElse(5)
         ));
@@ -37,20 +37,21 @@ public class LocationController {
     @GetMapping("/{id}")
     public LocationResponse get(@PathVariable String id) throws Exception {
 
-        return locationResponseService.findById(id);
+        return locaitonService.findById(id);
     }
 
     @PostMapping
-    public LocationResponse post(@RequestBody LocactionRequest locactionRequest) {
-        return null;
+    public LocationResponse post(@RequestBody LocactionRequest locationRequest) throws Exception {
+        return locaitonService.save(locationRequest);
     }
 
     @PutMapping
-    public LocationResponse put(@RequestBody LocactionRequest locactionRequest) {
-        return null;
+    public LocationResponse put(@RequestBody LocactionRequest locationRequest) throws Exception {
+        return locaitonService.update(locationRequest);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
+        locaitonService.delete(id);
     }
 }

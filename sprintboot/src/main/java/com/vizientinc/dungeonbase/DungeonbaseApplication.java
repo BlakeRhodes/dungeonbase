@@ -2,8 +2,10 @@ package com.vizientinc.dungeonbase;
 
 import com.vizientinc.dungeonbase.models.ItemRecord;
 import com.vizientinc.dungeonbase.models.LocationRecord;
+import com.vizientinc.dungeonbase.models.PlayerRecord;
 import com.vizientinc.dungeonbase.repositories.ItemRepository;
 import com.vizientinc.dungeonbase.repositories.LocationRepository;
+import com.vizientinc.dungeonbase.repositories.PlayerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
@@ -18,15 +20,18 @@ public class DungeonbaseApplication implements ApplicationRunner {
 
 	final LocationRepository locationRepository;
 	final ItemRepository itemRepository;
+	final PlayerRepository playerRepository;
 
 	private static final Logger LOG = LoggerFactory.getLogger(DungeonbaseApplication.class);
 
 	public DungeonbaseApplication(
 		LocationRepository locationRepository,
-		ItemRepository itemRepository
+		ItemRepository itemRepository,
+		PlayerRepository playerRepository
 	) {this.locationRepository =
 		locationRepository;
 		this.itemRepository = itemRepository;
+		this.playerRepository = playerRepository;
 	}
 
 	public static void main(String[] args) {
@@ -96,8 +101,18 @@ public class DungeonbaseApplication implements ApplicationRunner {
 			);
 			locationRepository.save(klargsCave);
 			LOG.info("Start not found creating one with id " + start.getId());
+			PlayerRecord fatherSimon = new PlayerRecord(
+				null, "Father Simon", caveMouth.getId()
+			);
+			fatherSimon = playerRepository.save(fatherSimon);
+			ItemRecord rodOfThePactkeeper = new ItemRecord(
+				null, "Rod of the Pact Keeper", "Gives warlocks +2 to spell attacks and DCs.", fatherSimon.getId()
+			);
+			itemRepository.save(rodOfThePactkeeper);
+
 		} else {
 			LOG.info("Start found with id " + start.getId());
 		}
+		LOG.info("http://localhost:8080/v1/locations/" + start.getId());
 	}
 }
