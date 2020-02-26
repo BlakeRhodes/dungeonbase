@@ -74,7 +74,8 @@ public class LocaitonService {
                 methodOn(LocationController.class)
                     .get(
                         Optional.of(page.getPageNumber()),
-                        Optional.of(page.getPageSize())
+                        Optional.of(page.getPageSize()),
+                        ""
                     )
             ).withSelfRel()
         );
@@ -84,7 +85,8 @@ public class LocaitonService {
                 methodOn(LocationController.class)
                     .get(
                         Optional.of(page.getPageNumber() + 1),
-                        Optional.of(page.getPageSize())
+                        Optional.of(page.getPageSize()),
+                        ""
                     )
                   ).withRel("next")
             );
@@ -96,7 +98,8 @@ public class LocaitonService {
                 methodOn(LocationController.class)
                     .get(
                         Optional.of(page.getPageNumber()-1),
-                        Optional.of(page.getPageSize())
+                        Optional.of(page.getPageSize()),
+                        ""
                     )
             ).withRel("previous"));
         }

@@ -22,13 +22,12 @@ public class ItemController {
     }
 
     @GetMapping()
-    public List<ItemResponse> get() throws Exception{
+    public List<ItemResponse> get() {
         return itemService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ItemResponse get(@PathVariable String id) throws
-        Exception {
+    public ItemResponse get(@PathVariable String id) throws Exception {
         return new ItemResponse(
             itemService.getItemById(id)
         );
@@ -42,9 +41,7 @@ public class ItemController {
     @PutMapping
     public ItemResponse put(@RequestBody ItemRequest itemRequest) throws Exception {
 
-        return new ItemResponse(
-            itemService.update(itemRequest)
-        );
+        return new ItemResponse(itemService.update(itemRequest));
     }
 
     @DeleteMapping("/{id}")

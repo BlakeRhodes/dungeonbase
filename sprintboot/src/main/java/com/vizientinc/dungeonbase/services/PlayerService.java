@@ -68,4 +68,8 @@ public class PlayerService {
     public List<PlayerRecord> findByLocation(String locationId) {
         return playerRepository.findAllByLocation(locationId);
     }
+
+    public void delete(String id) {
+        playerRepository.deleteById(id);
+    }
 }

@@ -47,6 +47,7 @@ public class PlayerController {
 
     @DeleteMapping("{id}")
     public void delete(String id){
+        playerService.delete(id);
     }
 
 }

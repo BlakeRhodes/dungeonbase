@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @RestController
@@ -25,8 +26,9 @@ public class LocationController {
     @GetMapping
     public CollectionModel<LocationResponse> get(
         @RequestParam(required = false) Optional<Integer> page,
-        @RequestParam(required = false) Optional<Integer> size
-    ) throws Exception {
+        @RequestParam(required = false) Optional<Integer> size,
+        @RequestParam(required = false) String sort
+        ) throws Exception {
 
         return locaitonService.findAll(PageRequest.of(
             page.orElse(0),
